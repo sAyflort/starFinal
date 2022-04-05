@@ -49,6 +49,16 @@ public class ParticleController extends ObjectPool<Particle> {
                                 1, 0, 0.8f, 0.4f);
                     }
                     break;
+                case FIELD:
+                    for (int i = 0; i < 16; i++) {
+                        float angle = 6.28f / 16.0f * i;
+                        setup(p.getPosition().x, p.getPosition().y,
+                                (float) Math.cos(angle) * 100.0f, (float) Math.sin(angle) * 100.0f,
+                                0.8f, 3.0f, 2.5f,
+                                0, 0, 1, 1,
+                                0, 0.3f, 0.8f, 0.4f);
+                    }
+                    break;
             }
         }
 

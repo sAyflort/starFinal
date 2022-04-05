@@ -32,7 +32,17 @@ public class WorldRenderer {
         gc.getPowerUpsController().render(batch);
         gc.getBotController().render(batch);
         gc.getInfoController().render(batch, font32);
+        if(gc.getHero().getIsTakeDamage()) {
+            batch.setColor(1, 0, 0, 1);
+        }
         gc.getHero().render(batch);
+        batch.setColor(1, 1, 1, 1);
+        if(gc.getHero().getIsImmortal()) {
+            batch.setColor(0, 0.5f, 1, 0.65f);
+            batch.draw(gc.getBackground().getTextureStar(), gc.getHero().position.x - 8, gc.getHero().position.y - 8,
+                    8, 8, 16, 16, 12, 12, 0, false);
+            batch.setColor(1, 1, 1, 1);
+        }
         gc.getHero().renderGUI(batch, font32);
         if (gc.getTimer() < 3) {
             sb.setLength(0);

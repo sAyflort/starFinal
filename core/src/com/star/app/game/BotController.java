@@ -20,7 +20,11 @@ public class BotController extends ObjectPool<Bot> {
     public void render(SpriteBatch batch) {
         for (int i = 0; i < activeList.size(); i++) {
             Bot b = activeList.get(i);
+            if(b.getIsTakeDamage()) {
+                batch.setColor(1, 0, 0, 1);
+            }
             b.render(batch);
+            batch.setColor(1, 1, 1, 1);
         }
     }
 

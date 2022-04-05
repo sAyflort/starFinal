@@ -24,7 +24,7 @@ public class Bot extends Ship implements Poolable {
         this.active = false;
         this.tempVec = new Vector2();
         this.ownerType = OwnerType.BOT;
-        this.weaponNum = MathUtils.random(gc.getLevel() + 1);
+        this.weaponNum = MathUtils.random((gc.getLevel() + 1 > weapons.length-1) ? (weapons.length-1) : gc.getLevel() + 1);
         this.currentWeapon = weapons[weaponNum];
     }
 

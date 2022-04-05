@@ -38,6 +38,13 @@ ship
   orig: 64, 64
   offset: 0, 0
   index: -1
+field
+  rotate: false
+  xy: 408, 2
+  size: 52, 64
+  orig: 52, 64
+  offset: 0, 0
+  index: -1
 smButton
   rotate: false
   xy: 260, 84
@@ -47,14 +54,14 @@ smButton
   index: -1
 bullet
   rotate: false
-  xy: 408, 2
+  xy: 462, 2
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 star16
   rotate: false
-  xy: 408, 36
+  xy: 462, 36
   size: 16, 16
   orig: 16, 16
   offset: 0, 0

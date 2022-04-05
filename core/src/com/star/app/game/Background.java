@@ -76,4 +76,7 @@ public class Background {
         textureCosmos.dispose();
     }
 
+    public TextureRegion getTextureStar() {
+        return textureStar;
+    }
 }
