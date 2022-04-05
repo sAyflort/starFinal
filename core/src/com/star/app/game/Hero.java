@@ -29,6 +29,9 @@ public class Hero extends Ship {
     private int scoreView;
     private StringBuilder sb;
     private int money;
+    private int level = 1;
+    private float timeField;
+    private boolean isImmortal;
     private Shop shop;
     private Circle magneticField;
 
@@ -50,6 +53,18 @@ public class Hero extends Ship {
 
     public boolean isMoneyEnough(int amount) {
         return money >= amount;
+    }
+
+    public void incLevel() {
+        level++;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public boolean getIsImmortal() {
+        return isImmortal;
     }
 
     public void decreaseMoney(int amount) {
@@ -77,6 +92,14 @@ public class Hero extends Ship {
         score += amount;
     }
 
+    public void takeDamage(int amount) {
+        if(!isImmortal) {
+            hp -= amount;
+            isTakeDamage = true;
+            damageTime = 0.1f;
+        }
+    }
+
     public void consume(PowerUp p) {
         sb.setLength(0);
         switch (p.getType()) {
@@ -91,13 +114,17 @@ public class Hero extends Ship {
                 break;
             case AMMOS:
                 int count = currentWeapon.addAmmos(p.getPower());
-                sb.append("AMMOS +").append(count);
+                sb.append("AMMO +").append(count);
                 gc.getInfoController().setup(p.getPosition().x, p.getPosition().y, sb,Color.RED );
                 break;
             case MONEY:
                 money += p.getPower();
                 sb.append("MONEY +").append(p.getPower());
                 gc.getInfoController().setup(p.getPosition().x, p.getPosition().y, sb,Color.YELLOW );
+                break;
+            case FIELD:
+                timeField = 5;
+                isImmortal = true;
                 break;
         }
     }
@@ -141,6 +168,7 @@ public class Hero extends Ship {
         sb.append("MONEY: ").append(money).append("\n");
         sb.append("MAGNETIC: ").append((int) magneticField.radius).append("\n");
         sb.append("TIMER: ").append((int) gc.getTimer()).append("\n");
+        sb.append("LEVEL: ").append(gc.getLevel()).append("\n");
         font.draw(batch, sb, 20, 700);
     }
 
@@ -152,8 +180,12 @@ public class Hero extends Ship {
     public void update(float dt) {
         super.update(dt);
         updateScore(dt);
+        timeField-=dt;
+        if (timeField < 0) {
+            isImmortal = false;
+        }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.P)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.E)) {
             shop.setVisible(true);
             gc.setPause(true);
         }

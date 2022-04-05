@@ -127,6 +127,7 @@ public class GameController {
         }
         if (asteroidController.getActiveList().size() == 0) {
             level++;
+            hero.incLevel();
             generateBigAsteroids(level + 2);
             timer = 0;
         }

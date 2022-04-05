@@ -22,6 +22,8 @@ public class Ship {
     protected int weaponNum;
     protected Weapon[] weapons;
     protected OwnerType ownerType;
+    protected boolean isTakeDamage;
+    protected float damageTime;
 
     public OwnerType getOwnerType() {
         return ownerType;
@@ -45,6 +47,10 @@ public class Ship {
 
     public float getAngle() {
         return angle;
+    }
+
+    public boolean getIsTakeDamage() {
+        return isTakeDamage;
     }
 
     public boolean isAlive() {
@@ -76,6 +82,11 @@ public class Ship {
         fireTimer += dt;
         position.mulAdd(velocity, dt);
         hitArea.setPosition(position);
+        damageTime -= dt;
+        if(damageTime < 0) {
+            damageTime = 0;
+            isTakeDamage = false;
+        }
 
         float stopKoef = 1.0f - dt;
         if (stopKoef < 0.0f) {
@@ -87,6 +98,8 @@ public class Ship {
 
     public void takeDamage(int amount) {
         hp -= amount;
+        isTakeDamage = true;
+        damageTime = 0.1f;
     }
 
     private void createWeapons() {

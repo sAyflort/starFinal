@@ -6,7 +6,7 @@ import com.star.app.game.helpers.Poolable;
 
 public class PowerUp implements Poolable {
     public enum Type {
-        MEDKIT(0), MONEY(1), AMMOS(2);
+        MEDKIT(0), MONEY(1), AMMOS(2), FIELD(3);
 
         int index;
 
